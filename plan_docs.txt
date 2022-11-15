@@ -1,0 +1,35 @@
+Main Process{
+    make sure that the website intended to use for scraping is okay with me scraping it. check its policies logically or maybe make up a url lookup table?
+
+    scrape data from a variety of sites. take it in the form of text from raw html data so it can be used to take metadata and be changed easily in addition to
+    just being able to be used for data processing
+
+    determine the confidence in general data. seek and scan between a variety of different sources for a given search and check which keywords overlay the most. use
+    the bodies of text these keywords are found in to determine the context of the keyworks (ie if "egg" is found in the pages for how to do an omelette, see why? does it
+    want me to go buy eggs before preparing? should i be eating raw eggs to make it easier to make omelettes? or does the site want me to include egg in my recipe)
+
+    compile confident data with context clarity into a body of text. this might be done using information from the body text from #3, but should rely on a pseudo-smart
+    human speech mimic for the most part
+
+    output this data to the user
+
+    allow user input into the program. does the user want more data? does the user want youtube videos on how to do x? does the user need a more simple or complex explanation?
+    does the user want citation to a given response's source?
+
+    provide ample response to #6
+}
+
+Decorative Process{
+    options{
+        - site? i know html and css now...
+        - represent data and I/O with an exe's gui. java?
+    }
+
+    this program needs to look simple. it should have barebones stuff on it since its all about the barebones. sleek and simple.
+
+    tips{
+        - ask bruno for UX stuff
+        - use tools like adobe colour picker when designing visual elements (you're not good at art!)
+        - DO NOT LET THIS FALL INTO TEXT BASED DEVELOPMENT: IMAGERY AND GUI ARE IMPORTANT
+    }
+}
