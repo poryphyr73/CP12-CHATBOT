@@ -1,7 +1,7 @@
 import os
 import openai
 
-openai.api_key = "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"
+openai.api_key = "apikey"
 
 inp = ""
 response = ""
@@ -19,12 +19,10 @@ def get_confidence():
   conf = int(input("Is this answer clear enough?\n\nSelections:\n\t[1]: 'I would like some elaboration'\n\t[2]: 'I would like some additional resources'\n\t[3]: 'That answer was clear'\n"))
   if conf == 1:
     elaborate()
-    return True
   elif conf == 2:
     provide_resources()
-    return True
   elif conf == 3:
-    return check_more_questions()
+    check_more_questions()
   else:
     print("Invalid selection. Please try again!")
 
@@ -42,13 +40,11 @@ def check_more_questions():
   more_questions = input("Do you have any other questions for me? (Y/N)")
   if more_questions == 'Y':
     print("Understood! Please continue.")
-    return True
   elif more_questions == 'N':
     print("Understood! Thank you for using XX")
-    return False
+    quit()
   else:
     print("Invalid selection. Please try again!")
-    return check_more_questions()
 
 def get_bot_reply(text_prompt):
   return openai.Completion.create(
@@ -74,4 +70,4 @@ age = set_age()
 while(app_is_active):
   inp = get_input()
   yield_response()
-  app_is_active = get_confidence()
+  get_confidence()
