@@ -1,15 +1,26 @@
 import os
 import openai
 
-openai.api_key = "apikey"
+openai.api_key = "<Insert your API key>"
 
 inp = ""
 response = ""
-app_is_active = True
+app_chatbot_active = False
+app_citation_active = False
 age = 0
 
-def get_input():
-  return input("Ask the bot a question: ")
+tool = int(input("What tool would you like to use?\n\t[1] Chatbot\n\t[2] Citation Machine (Early Testing)\n\t[3] Quit\n"))
+if tool == 1:
+  app_chatbot_active = True
+elif tool == 2:
+  app_citation_active = True
+elif tool == 3:
+  quit()
+else:
+  print("Invalid selection. Defaulting to chatbot.")
+
+def get_input(prompt):
+  return input(prompt)
 
 def yield_response():
   response = get_bot_reply("respond to the following question: "+inp+". A "+age+"-year old should be able to understand this information.")
@@ -37,14 +48,22 @@ def provide_resources():
   get_confidence()
 
 def check_more_questions():
-  more_questions = input("Do you have any other questions for me? (Y/N)")
+  more_questions = input("Do you have any other prompts for me? (Y/N, defaults to Y) ")
   if more_questions == 'Y':
     print("Understood! Please continue.")
   elif more_questions == 'N':
     print("Understood! Thank you for using XX")
     quit()
   else:
-    print("Invalid selection. Please try again!")
+    print("Invalid selection. Defaulting.")
+
+def generate_citation():
+  form = int(input("What style guide should the citation follow?\n\t[1] MLA (Default)\n\t[2] APA\n\t[3] Chicago\n"))
+  text_form = "MLA"
+  if form == 2: text_form = "APA"
+  if form == 3: text_form = "Chicago"
+  citation = get_bot_reply("Attempt to generate a bibliographical citation in "+text_form+" style for the following source:"+inp)
+  print(citation["choices"][0]["text"])
 
 def get_bot_reply(text_prompt):
   return openai.Completion.create(
@@ -60,14 +79,19 @@ def get_bot_reply(text_prompt):
 def set_age():
   value = 0
   try:
-    value = int(input("Please input you age in years: "))
+    value = int(input("Please input your age in years: "))
   except:
     print("Invalid age. Please try again!")
     value = set_age()
   return str(value)
 
 age = set_age()
-while(app_is_active):
-  inp = get_input()
+while(app_chatbot_active):
+  inp = get_input("Ask the bot a question: ")
   yield_response()
   get_confidence()
+
+while(app_citation_active):
+  inp = get_input("Input a source to cite: ")
+  generate_citation()
+  check_more_questions()
